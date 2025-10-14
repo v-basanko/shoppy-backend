@@ -1,0 +1,28 @@
+name: shoppy
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: shoppy-postgres
+    environment:
+      PGDATA: /var/postgresql/data
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5432:5432'
+    restart: always
+    volumes:
+      - /home/postgresql:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: shoppy-pgadmin
+    ports:
+      - '5050:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    restart: always
+
+volumes:
+  data:
+    driver: local
